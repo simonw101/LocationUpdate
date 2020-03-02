@@ -7,4 +7,10 @@ class CurrentWeatherModel() {
     var time: String = ""
 
     var temp: String = ""
+
+    var icon: String = ""
+
+    var chanceOFRain: String = ""
+
+    var humidity: String = ""
 }

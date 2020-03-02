@@ -24,11 +24,23 @@ class ParseJson {
 
             var temp = currently.getString("temperature")
 
+            var icon = currently.getString("icon")
+
+            var chanceOFRain = currently.getString("precipProbability");
+
+            var humidity = currently.getString("humidity")
+
             currentWeatherModel.summary = summary
 
             currentWeatherModel.time = time
 
             currentWeatherModel.temp = temp
+
+            currentWeatherModel.icon = icon
+
+            currentWeatherModel.chanceOFRain = chanceOFRain
+
+            currentWeatherModel.humidity = humidity
 
         } catch (e: JSONException) {
 

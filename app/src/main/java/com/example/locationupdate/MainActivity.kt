@@ -167,6 +167,12 @@ class MainActivity : AppCompatActivity() {
                                     timeTV.text = currentWeatherModel.time
 
                                     temperatureTV.text = currentWeatherModel.temp
+
+                                    Log.i(TAG, currentWeatherModel.icon)
+
+                                    chanceOfRainTV.text = currentWeatherModel.chanceOFRain
+
+                                    humidityTV.text = currentWeatherModel.humidity
                                 }
 
                             } catch (e: JSONException) {
