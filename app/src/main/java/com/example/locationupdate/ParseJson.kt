@@ -34,13 +34,15 @@ class ParseJson {
 
             currentWeatherModel.time = time
 
-            currentWeatherModel.temp = temp
+            currentWeatherModel.temp = currentWeatherModel.convertTempToCelcius(temp)
 
             currentWeatherModel.icon = icon
 
             currentWeatherModel.chanceOFRain = chanceOFRain
 
             currentWeatherModel.humidity = humidity
+
+            currentWeatherModel.icon  = icon
 
         } catch (e: JSONException) {
 

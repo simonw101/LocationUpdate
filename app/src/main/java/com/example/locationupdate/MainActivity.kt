@@ -173,6 +173,51 @@ class MainActivity : AppCompatActivity() {
                                     chanceOfRainTV.text = currentWeatherModel.chanceOFRain
 
                                     humidityTV.text = currentWeatherModel.humidity
+
+                                    //icons
+
+                                    if (currentWeatherModel.icon == "clear-day") {
+
+                                        weatherIcon.setImageResource(R.drawable.sun)
+
+                                    } else if (currentWeatherModel.icon == "clear-night") {
+
+                                        weatherIcon.setImageResource(R.drawable.clearnight)
+
+                                    } else if (currentWeatherModel.icon == "rain") {
+
+                                        weatherIcon.setImageResource(R.drawable.rain)
+
+                                    } else if (currentWeatherModel.icon == "snow") {
+
+                                        weatherIcon.setImageResource(R.drawable.snowing)
+
+                                    } else if (currentWeatherModel.icon == "sleet") {
+
+                                        weatherIcon.setImageResource(R.drawable.sleet)
+
+                                    } else if (currentWeatherModel.icon == "wind") {
+
+                                        weatherIcon.setImageResource(R.drawable.wind)
+
+                                    } else if (currentWeatherModel.icon == "fog") {
+
+                                        weatherIcon.setImageResource(R.drawable.fog)
+
+                                    } else if (currentWeatherModel.icon == "cloudy") {
+
+                                        weatherIcon.setImageResource(R.drawable.cloudy)
+
+                                    } else if (currentWeatherModel.icon == "partly-cloudy-day") {
+
+                                        weatherIcon.setImageResource(R.drawable.partlycloudyday)
+
+                                    } else if (currentWeatherModel.icon == "partly-cloudy-night") {
+
+                                        weatherIcon.setImageResource(R.drawable.partlycloudnight)
+                                    }
+
+                                    Log.i(TAG, currentWeatherModel.icon)
                                 }
 
                             } catch (e: JSONException) {
