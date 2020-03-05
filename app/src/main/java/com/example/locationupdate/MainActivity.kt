@@ -2,6 +2,7 @@ package com.example.locationupdate
 
 import android.Manifest
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
@@ -74,6 +75,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var pref: SharedPreferences = applicationContext.getSharedPreferences("myPref", 0)
+
+        var savedData = pref.getString("postcode", null)
+
+        addressTV.text = savedData
+
+        var tempData = pref.getString("temp", null)
+
+        temperatureTV.text = tempData
+
+        var name = pref.getString("name", null)
+
+        Log.i(TAG, savedData)
+        Log.i(TAG, tempData)
+        Log.i(TAG, name)
+
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager?
 
         val permission =
@@ -101,6 +118,8 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+        Log.i(TAG, "onCreate")
     }
 
     private val locationListener: LocationListener = object : LocationListener {
@@ -176,7 +195,6 @@ class MainActivity : AppCompatActivity() {
 
                                     humidityTV.text = currentWeatherModel.humidity
 
-                                    timeTV.text = currentWeatherModel.time
 
                                     //icons
 
@@ -241,6 +259,18 @@ class MainActivity : AppCompatActivity() {
 
                             }
 
+                            var pref: SharedPreferences = applicationContext.getSharedPreferences("myPref", 0)
+
+                            val editor = pref.edit()
+
+                            editor.putString("name", "simon")
+
+                            editor.putString("postcode", addressTV.text.toString())
+
+                            editor.putString("temp", temperatureTV.text.toString())
+
+                            editor.apply()
+
                         }
                     }
 
@@ -279,6 +309,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_list, menu)
@@ -287,5 +318,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
     }
 }

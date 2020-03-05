@@ -1,5 +1,6 @@
 package com.example.locationupdate
 
+import android.content.SharedPreferences
 import android.util.Log
 import org.json.JSONException
 import org.json.JSONObject
