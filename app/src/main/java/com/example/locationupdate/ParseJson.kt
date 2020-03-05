@@ -38,9 +38,9 @@ class ParseJson {
 
             currentWeatherModel.icon = icon
 
-            currentWeatherModel.chanceOFRain = chanceOFRain
+            currentWeatherModel.chanceOFRain = currentWeatherModel.chanceOfRainFun(chanceOFRain)
 
-            currentWeatherModel.humidity = humidity
+            currentWeatherModel.humidity = currentWeatherModel.humidityFun(humidity)
 
             currentWeatherModel.icon  = icon
 

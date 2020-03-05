@@ -20,4 +20,19 @@ class CurrentWeatherModel() {
 
         return String.format("%.0f", result) + "\u00B0" + "C"
     }
+
+    fun chanceOfRainFun(rainVar: String) : String {
+
+        val result = (rainVar.toDouble() * 100)
+
+        return "Precipitation: " + String.format("%.0f", result) + "%"
+    }
+
+    fun humidityFun(humidityVar: String) : String {
+
+        val result = (humidityVar.toDouble() * 100)
+
+        return "Humidity: " + String.format("%.0f", result) + "%"
+
+    }
 }
