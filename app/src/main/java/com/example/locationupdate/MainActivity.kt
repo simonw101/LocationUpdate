@@ -7,10 +7,12 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
 import org.json.JSONException
@@ -105,7 +107,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun onLocationChanged(location: Location?) {
 
-            var url =
+            val url =
                 "https://api.darksky.net/forecast/ea433c8422ff91fb7995532f7887621a/${location?.latitude},${location?.longitude}"
 
             Log.i(TAG, url)
@@ -174,47 +176,60 @@ class MainActivity : AppCompatActivity() {
 
                                     humidityTV.text = currentWeatherModel.humidity
 
+                                    timeTV.text = currentWeatherModel.time
+
                                     //icons
 
-                                    if (currentWeatherModel.icon == "clear-day") {
+                                    when (currentWeatherModel.icon) {
+                                        "clear-day" -> {
 
-                                        weatherIcon.setImageResource(R.drawable.sun)
+                                            weatherIcon.setImageResource(R.drawable.sun)
 
-                                    } else if (currentWeatherModel.icon == "clear-night") {
+                                        }
+                                        "clear-night" -> {
 
-                                        weatherIcon.setImageResource(R.drawable.clearnight)
+                                            weatherIcon.setImageResource(R.drawable.clearnight)
 
-                                    } else if (currentWeatherModel.icon == "rain") {
+                                        }
+                                        "rain" -> {
 
-                                        weatherIcon.setImageResource(R.drawable.rain)
+                                            weatherIcon.setImageResource(R.drawable.rain)
 
-                                    } else if (currentWeatherModel.icon == "snow") {
+                                        }
+                                        "snow" -> {
 
-                                        weatherIcon.setImageResource(R.drawable.snowing)
+                                            weatherIcon.setImageResource(R.drawable.snowing)
 
-                                    } else if (currentWeatherModel.icon == "sleet") {
+                                        }
+                                        "sleet" -> {
 
-                                        weatherIcon.setImageResource(R.drawable.sleet)
+                                            weatherIcon.setImageResource(R.drawable.sleet)
 
-                                    } else if (currentWeatherModel.icon == "wind") {
+                                        }
+                                        "wind" -> {
 
-                                        weatherIcon.setImageResource(R.drawable.wind)
+                                            weatherIcon.setImageResource(R.drawable.wind)
 
-                                    } else if (currentWeatherModel.icon == "fog") {
+                                        }
+                                        "fog" -> {
 
-                                        weatherIcon.setImageResource(R.drawable.fog)
+                                            weatherIcon.setImageResource(R.drawable.fog)
 
-                                    } else if (currentWeatherModel.icon == "cloudy") {
+                                        }
+                                        "cloudy" -> {
 
-                                        weatherIcon.setImageResource(R.drawable.cloudy)
+                                            weatherIcon.setImageResource(R.drawable.cloudy)
 
-                                    } else if (currentWeatherModel.icon == "partly-cloudy-day") {
+                                        }
+                                        "partly-cloudy-day" -> {
 
-                                        weatherIcon.setImageResource(R.drawable.partlycloudyday)
+                                            weatherIcon.setImageResource(R.drawable.partlycloudyday)
 
-                                    } else if (currentWeatherModel.icon == "partly-cloudy-night") {
+                                        }
+                                        "partly-cloudy-night" -> {
 
-                                        weatherIcon.setImageResource(R.drawable.partlycloudnight)
+                                            weatherIcon.setImageResource(R.drawable.partlycloudnight)
+                                        }
                                     }
 
                                     Log.i(TAG, currentWeatherModel.icon)
@@ -241,7 +256,7 @@ class MainActivity : AppCompatActivity() {
 
         try {
 
-            if (location?.latitude != null && location?.longitude != null) {
+            if (location?.latitude != null) {
                 val address = geoCoder.getFromLocation(location.latitude, location.longitude, 1)
 
                 if (address.size > 0) {
@@ -262,6 +277,15 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_list, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -32,7 +32,7 @@ class ParseJson {
 
             currentWeatherModel.summary = summary
 
-            currentWeatherModel.time = time
+            currentWeatherModel.time = currentWeatherModel.formattedTime()
 
             currentWeatherModel.temp = currentWeatherModel.convertTempToCelcius(temp)
 
