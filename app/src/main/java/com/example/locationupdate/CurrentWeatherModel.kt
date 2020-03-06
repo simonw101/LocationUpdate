@@ -46,7 +46,7 @@ class CurrentWeatherModel() {
 
         val date = Date(timeStamp.time)
 
-        val format = SimpleDateFormat("dd/MM HH:mm")
+        val format = SimpleDateFormat("dd/MM HH:mm:ss")
 
         return "Last updated: ${format.format(date)}"
 

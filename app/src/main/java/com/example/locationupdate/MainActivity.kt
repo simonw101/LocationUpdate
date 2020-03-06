@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
 import org.json.JSONException
@@ -106,6 +107,8 @@ class MainActivity : AppCompatActivity() {
         restoreState()
 
         Log.i(TAG, "onCreate")
+
+
     }
 
     private val locationListener: LocationListener = object : LocationListener {
@@ -175,8 +178,6 @@ class MainActivity : AppCompatActivity() {
 
                                     temperatureTV.text = currentWeatherModel.temp
 
-                                    Log.i(TAG, currentWeatherModel.icon)
-
                                     chanceOfRainTV.text = currentWeatherModel.chanceOFRain
 
                                     humidityTV.text = currentWeatherModel.humidity
@@ -235,8 +236,6 @@ class MainActivity : AppCompatActivity() {
                                             weatherIcon.setImageResource(R.drawable.partlycloudnight)
                                         }
                                     }
-
-                                    Log.i(TAG, currentWeatherModel.icon)
                                 }
 
                             } catch (e: JSONException) {
@@ -249,7 +248,6 @@ class MainActivity : AppCompatActivity() {
 
                         }
                     }
-
 
                 }
             }
@@ -320,7 +318,17 @@ class MainActivity : AppCompatActivity() {
 
         summaryTV.text = summaryData
 
+        var humidityData = pref.getString("humidity", null)
 
+        humidityTV.text = humidityData
+
+        var rainData = pref.getString("rain", null)
+
+        chanceOfRainTV.text = rainData
+
+        var timeData = pref.getString("time", null)
+
+        timeTV.text = timeData
     }
 
     fun savedState() {
@@ -329,13 +337,19 @@ class MainActivity : AppCompatActivity() {
 
         val editor = pref.edit()
 
-        editor.putString("name", "simon")
-
         editor.putString("postcode", addressTV.text.toString())
 
         editor.putString("temp", temperatureTV.text.toString())
 
         editor.putString("summary", summaryTV.text.toString())
+
+        editor.putString("humidity", humidityTV.text.toString())
+
+        editor.putString("rain", chanceOfRainTV.text.toString())
+
+        editor.putString("time", timeTV.text.toString())
+
+        //editor.putInt("icon", weatherIcon.setImageResource())
 
         editor.apply()
 
@@ -365,6 +379,24 @@ class MainActivity : AppCompatActivity() {
         super.onRestart()
 
         restoreState()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        savedState()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        savedState()
+    }
+
+    fun refresh(view: View) {
+
+        refeshButton.animate().rotationBy(360f).setDuration(3000).start()
+
     }
 
 }
