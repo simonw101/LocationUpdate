@@ -53,8 +53,8 @@ class MainActivity : AppCompatActivity() {
 
                         locationManager?.requestLocationUpdates(
                             LocationManager.NETWORK_PROVIDER,
-                            0L,
-                            0f,
+                            10000L,
+                            10f,
                             locationListener
                         )
 
@@ -91,8 +91,8 @@ class MainActivity : AppCompatActivity() {
 
                 locationManager?.requestLocationUpdates(
                     LocationManager.NETWORK_PROVIDER,
-                    0L,
-                    0f,
+                    10000L,
+                    10f,
                     locationListener
                 )
 
