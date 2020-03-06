@@ -75,22 +75,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var pref: SharedPreferences = applicationContext.getSharedPreferences("myPref", 0)
-
-        var savedData = pref.getString("postcode", null)
-
-        addressTV.text = savedData
-
-        var tempData = pref.getString("temp", null)
-
-        temperatureTV.text = tempData
-
-        var name = pref.getString("name", null)
-
-        Log.i(TAG, savedData)
-        Log.i(TAG, tempData)
-        Log.i(TAG, name)
-
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager?
 
         val permission =
@@ -118,6 +102,8 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+        restoreState()
 
         Log.i(TAG, "onCreate")
     }
@@ -259,17 +245,7 @@ class MainActivity : AppCompatActivity() {
 
                             }
 
-                            var pref: SharedPreferences = applicationContext.getSharedPreferences("myPref", 0)
-
-                            val editor = pref.edit()
-
-                            editor.putString("name", "simon")
-
-                            editor.putString("postcode", addressTV.text.toString())
-
-                            editor.putString("temp", temperatureTV.text.toString())
-
-                            editor.apply()
+                            savedState()
 
                         }
                     }
@@ -327,4 +303,68 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
     }
+
+    fun restoreState() {
+
+        var pref: SharedPreferences = applicationContext.getSharedPreferences("myPref", 0)
+
+        var savedData = pref.getString("postcode", null)
+
+        addressTV.text = savedData
+
+        var tempData = pref.getString("temp", null)
+
+        temperatureTV.text = tempData
+
+        var summaryData = pref.getString("summary", null)
+
+        summaryTV.text = summaryData
+
+
+    }
+
+    fun savedState() {
+
+        var pref: SharedPreferences = applicationContext.getSharedPreferences("myPref", 0)
+
+        val editor = pref.edit()
+
+        editor.putString("name", "simon")
+
+        editor.putString("postcode", addressTV.text.toString())
+
+        editor.putString("temp", temperatureTV.text.toString())
+
+        editor.putString("summary", summaryTV.text.toString())
+
+        editor.apply()
+
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        restoreState()
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        restoreState()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        restoreState()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+
+        restoreState()
+    }
+
 }
